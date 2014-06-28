@@ -1,0 +1,18 @@
+{
+	"name": "asgard/entityimage",
+	"license": "MIT",
+	"authors": [{
+		"name": "Michel Hognerud",
+		"email": "michel@hognerud.net"
+	}],
+	"require": {
+        "php": ">=5.4.0",
+        "imagine/imagine": "0.*",
+        "asgard/entity": "dev-master"
+	},
+	"autoload": {
+		"psr-4": {
+			"Asgard\\Entityimage\\": "."
+		}
+	}
+}
