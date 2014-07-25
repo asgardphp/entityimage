@@ -14,7 +14,7 @@ class ImageWidget extends \Asgard\Form\Widget {
 			'name'	=>	$this->name,
 			'id'	=>	isset($options['id']) ? $options['id']:null,
 		]+$attrs);
-		$app = $this->field->getTopForm()->getApp();
+		$container = $this->field->getTopForm()->getContainer();
 		$entity = $this->field->getTopForm()->getEntity();
 		$name = $this->field->name;		
 		$optional = !$entity->getDefinition()->property($name)->required();
@@ -24,11 +24,11 @@ class ImageWidget extends \Asgard\Form\Widget {
 			if(!$path || $entity->$name->isUploaded())
 				return $str;
 			$str .= '<p>
-				<a target="_blank" href="'.$app['request']->url->to($path).'" rel="facebox"><img src="'.$app['imagecache']->url($path, 'admin_thumb').'" alt=""/></a>
+				<a target="_blank" href="'.$container['request']->url->to($path).'" rel="facebox"><img src="'.$container['imagecache']->url($path, 'admin_thumb').'" alt=""/></a>
 			</p>';
 			
 			if($optional)
-				$str .= '<a href="'.$app['resolver']->url_for(['Admin\Controllers\FilesController', 'delete'], ['entityAlias' => $app['adminManager']->getAlias(get_class($entity)), 'id' => $entity->id, 'file' => $name]).'">'. __('Delete').'</a><br/><br/>';
+				$str .= '<a href="'.$container['resolver']->url_for(['Admin\Controllers\FilesController', 'delete'], ['entityAlias' => $container['adminManager']->getAlias(get_class($entity)), 'id' => $entity->id, 'file' => $name]).'">'. __('Delete').'</a><br/><br/>';
 		}
 
 		return $str;

@@ -14,7 +14,7 @@ class ImagesWidget extends \Asgard\Form\Widget {
 			'name'	=>	$this->name,
 			'id'	=>	isset($options['id']) ? $options['id']:null,
 		]+$attrs);
-		$app = $this->field->getParent()->getApp();
+		$container = $this->field->getParent()->getContainer();
 		$entity = $this->field->getParent()->getEntity();
 		$name = $this->field->name;		
 		$optional = !$entity->property($name)->required();
@@ -22,13 +22,13 @@ class ImagesWidget extends \Asgard\Form\Widget {
 		if($entity->isNew())
 			return null;
 		$uid = \Asgard\Common\Tools::randstr(10);
-		$app['html']->codeJS("
+		$container['html']->codeJS("
 			$(function(){
-				multiple_upload('$uid', '".$app['resolver']->url_for(['Admin\Controllers\FilesController', 'add'], ['entityAlias' => $app['adminManager']->getAlias(get_class($entity)), 'id' => $entity->id, 'file' => $name])."');
+				multiple_upload('$uid', '".$container['resolver']->url_for(['Admin\Controllers\FilesController', 'add'], ['entityAlias' => $container['adminManager']->getAlias(get_class($entity)), 'id' => $entity->id, 'file' => $name])."');
 			});");
-		$app['html']->includeJS('bundles/admin/uploadify/jquery.uploadify.min.js');
-		$app['html']->includeJS('bundles/admin/js/uploadify.php');
-		$app['html']->includeCSS('bundles/admin/uploadify/uploadify.css');
+		$container['html']->includeJS('bundles/admin/uploadify/jquery.uploadify.min.js');
+		$container['html']->includeJS('bundles/admin/js/uploadify.php');
+		$container['html']->includeCSS('bundles/admin/uploadify/uploadify.css');
 		ob_start();
 		?>
 		<div class="block">
@@ -53,13 +53,13 @@ class ImagesWidget extends \Asgard\Form\Widget {
 					$i=1;
 					foreach($entity->$name as $file):
 						$url = $file->url();
-					$thumb_url = $app['request']->url->to('imagecache/admin_thumb/'.$file->relativeToWebDir());
+					$thumb_url = $container['request']->url->to('imagecache/admin_thumb/'.$file->relativeToWebDir());
 					?>
 					<li>
 						<img src="<?=$thumb_url ?>" alt=""/>
 						<ul>
 							<li class="view"><a href="<?=$url ?>" rel="facebox"><?=__('See') ?></a></li>
-							<li class="delete"><a href="<?=$app['resolver']->url_for(['Admin\Controllers\FilesController', 'deleteOne'], ['entityAlias' => $app['adminManager']->getAlias(get_class($entity)), 'id' => $entity->id, 'pos' => $i, 'file' => $name]) ?>"><?=__('Del.') ?></a></li>
+							<li class="delete"><a href="<?=$container['resolver']->url_for(['Admin\Controllers\FilesController', 'deleteOne'], ['entityAlias' => $container['adminManager']->getAlias(get_class($entity)), 'id' => $entity->id, 'pos' => $i, 'file' => $name]) ?>"><?=__('Del.') ?></a></li>
 						</ul>
 					</li>
 					<?php

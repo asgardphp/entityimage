@@ -3,15 +3,15 @@ namespace Asgard\Entityimage\Tests;
 
 class EntityimageTest extends \PHPUnit_Framework_TestCase {
 	public static function setUpBeforeClass() {
-		$app = new \Asgard\Container\Container;
-		$app->register('Asgard.Entity.PropertyType.image', function($app, $params) { return new \Asgard\Entityimage\ImageProperty($params); });
-		$app['config'] = new \Asgard\Config\Config;
-		$app['hooks'] = new \Asgard\Hook\HooksManager($app);
-		$app['cache'] = new \Asgard\Cache\NullCache;
-		$app['rulesregistry'] = \Asgard\Validation\RulesRegistry::getInstance();
-		$app['rulesregistry']->registerNamespace('Asgard\File\Rules');
-		$app['entitiesmanager'] = new \Asgard\Entity\EntitiesManager($app);
-		\Asgard\Entity\Entity::setApp($app);
+		$container = new \Asgard\Container\Container;
+		$container->register('Asgard.Entity.PropertyType.image', function($container, $params) { return new \Asgard\Entityimage\ImageProperty($params); });
+		$container['config'] = new \Asgard\Config\Config;
+		$container['hooks'] = new \Asgard\Hook\HooksManager($container);
+		$container['cache'] = new \Asgard\Cache\NullCache;
+		$container['rulesregistry'] = \Asgard\Validation\RulesRegistry::getInstance();
+		$container['rulesregistry']->registerNamespace('Asgard\File\Rules');
+		$container['entitiesmanager'] = new \Asgard\Entity\EntitiesManager($container);
+		\Asgard\Entity\Entity::setContainer($container);
 	}
 
 	public function test() {
