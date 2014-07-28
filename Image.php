@@ -5,10 +5,12 @@ class Image extends \Asgard\Entity\File {
 	protected $format;
 	protected $quality;
 
-	public function format() {
+	public function format($name=null) {
+		if($name === null)
+			$name = $this->getName();
 		$format = $this->format;
 		if(!$format) {
-			$format = explode('.', $this->getName())[count(explode('.', $this->getName()))-1];
+			$format = explode('.', $name)[count(explode('.', $name))-1];
 			if($format == 'jpeg')
 				$format = 'jpg';
 		}
@@ -35,7 +37,7 @@ class Image extends \Asgard\Entity\File {
 		if($this->isAt($dst))
 			return;
 
-		$format = $this->format();
+		$format = $this->format($dst);
 		$dst = preg_replace('/\.[^\.]+$/', '', $dst);
 
 		$params = [];
@@ -55,6 +57,7 @@ class Image extends \Asgard\Entity\File {
 		$imagine->open($this->src)
 			->save($dst, $params);
 
+		$this->name = null;
 		return $this->src = $dst;
 	}
 }
