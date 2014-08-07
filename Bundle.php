@@ -2,7 +2,7 @@
 namespace Asgard\Entityimage;
 
 class Bundle extends \Asgard\Core\BundleLoader {
-	public function buildApp($container) {
+	public function buildContainer($container) {
 		$container->register('Asgard.Entity.PropertyType.image', function($container, $params) { return new ImageProperty($params); });
 	}
 

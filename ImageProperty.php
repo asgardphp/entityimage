@@ -9,8 +9,8 @@ class ImageProperty extends \Asgard\Entity\Properties\FileProperty {
 			return null;
 		$image = new \Asgard\Entityimage\Image($str);
 		$container = $this->definition->getContainer();
-		if($container->has('kernel') && isset($container['kernel']['webdir']))
-			$image->setWebDir($container['kernel']['webdir']);
+		if($container->has('kernel') && isset($container['config']['webdir']))
+			$image->setWebDir($container['config']['webdir']);
 		if($container->has('request'))
 			$image->setUrl($container['request']->url);
 		$image->setFormat($this->get('format'));
@@ -26,8 +26,8 @@ class ImageProperty extends \Asgard\Entity\Properties\FileProperty {
 			if($val instanceof \Asgard\Form\HttpFile)
 				$val = new \Asgard\Entityimage\Image($val->src(), $val->getName());
 			$container = $this->definition->getContainer();
-			if($container->has('kernel') && isset($container['kernel']['webdir']))
-				$val->setWebDir($container['kernel']['webdir']);
+			if($container->has('kernel') && isset($container['config']['webdir']))
+				$val->setWebDir($container['config']['webdir']);
 			if($container->has('request'))
 				$val->setUrl($container['request']->url);
 			$val->setFormat($this->get('format'));
