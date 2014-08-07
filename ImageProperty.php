@@ -23,7 +23,7 @@ class ImageProperty extends \Asgard\Entity\Properties\FileProperty {
 		if(is_string($val) && $val !== null)
 			$val = new \Asgard\Entityimage\Image($val);
 		if(is_object($val)) {
-			if($val instanceof \Asgard\Form\HttpFile)
+			if($val instanceof \Asgard\Http\HttpFile)
 				$val = new \Asgard\Entityimage\Image($val->src(), $val->getName());
 			$container = $this->definition->getContainer();
 			if($container->has('kernel') && isset($container['config']['webdir']))
