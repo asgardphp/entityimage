@@ -53,6 +53,8 @@ class Image extends \Asgard\Entity\File {
 		}
 		$dst = \Asgard\File\FileSystem::getNewFilename($dst);
 
+		\Asgard\File\FileSystem::mkdir(dirname($dst));
+
 		$imagine = new \Imagine\Gd\Imagine();
 		$imagine->open($this->src)
 			->save($dst, $params);
