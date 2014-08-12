@@ -24,7 +24,7 @@ class ImagesWidget extends \Asgard\Form\Widget {
 		$uid = \Asgard\Common\Tools::randstr(10);
 		$container['html']->codeJS("
 			$(function(){
-				multiple_upload('$uid', '".$container['resolver']->url_for(['Admin\Controllers\FilesController', 'add'], ['entityAlias' => $container['adminManager']->getAlias(get_class($entity)), 'id' => $entity->id, 'file' => $name])."');
+				multiple_upload('$uid', '".$container['resolver']->url_for(['Asgard\Entityimage\Controllers\AdminImagesController', 'addimage'], ['entityAlias' => $container['adminManager']->getAlias(get_class($entity)), 'id' => $entity->id, 'file' => $name])."');
 			});");
 		$container['html']->includeJS('bundles/admin/uploadify/jquery.uploadify.min.js');
 		$container['html']->includeJS('bundles/admin/js/uploadify.php');
@@ -48,12 +48,12 @@ class ImagesWidget extends \Asgard\Form\Widget {
 				<script>
 				window.parentID = <?=$entity->id ?>;
 				</script>
-				<ul class="imglist">
+				<ul class="imglist list">
 					<?php
 					$i=1;
 					foreach($entity->$name as $file):
 						$url = $file->url();
-					$thumb_url = $container['request']->url->to('imagecache/admin_thumb/'.$file->relativeToWebDir());
+						$thumb_url = $container['request']->url->to('imagecache/admin_thumb/'.$file->srcFromWebDir());
 					?>
 					<li>
 						<img src="<?=$thumb_url ?>" alt=""/>

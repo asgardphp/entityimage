@@ -7,16 +7,22 @@ class Bundle extends \Asgard\Core\BundleLoader {
 	}
 
 	public function run($container) {
+		parent::run($container);
+
 		$container['widgetsManager']->addNamespace('Asgard\Entityimage');
 		$container['adminEntityFieldsSolver']->addMultiple(function($property) {
-			if($property instanceof \Asgard\Entityimage\ImageProperty)
-				return new MultipleImagesField;
-			return new \Admin\Libs\Form\DynamicGroup;
+			if($property instanceof \Asgard\Entityimage\ImageProperty) {
+				if($property->get('web'))
+					return new MultipleImagesField;
+				else
+					return new \Admin\Libs\Form\Fields\MultipleFilesField;
+			}
 		});
 		$container['adminEntityFieldsSolver']->add(function($property) {
 			if(get_class($property) == 'Asgard\Entityimage\ImageProperty') {
 				$field = new \Asgard\Form\Fields\FileField;
-				$field->setDefaultWidget('image');
+				if($property->get('web'))
+					$field->setDefaultWidget('image');
 				return $field;
 			}
 		});

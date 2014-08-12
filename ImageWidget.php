@@ -20,11 +20,11 @@ class ImageWidget extends \Asgard\Form\Widget {
 		$optional = !$entity->getDefinition()->property($name)->required();
 
 		if($entity->isOld() && $entity->$name && $entity->$name->exists()) {
-			$path = $entity->$name->srcFromWebDir();
-			if(!$path || $entity->$name->isUploaded())
+			$file = $entity->$name;
+			if(!$file->src())
 				return $str;
 			$str .= '<p>
-				<a target="_blank" href="'.$container['request']->url->to($path).'" rel="facebox"><img src="'.$container['imagecache']->url($path, 'admin_thumb').'" alt=""/></a>
+				<a target="_blank" href="'.$container['request']->url->to($file->srcFromWebDir()).'" rel="facebox"><img src="'.$container['imagecache']->url($file->srcFromWebDir(), 'admin_thumb').'" alt=""/></a>
 			</p>';
 			
 			if($optional)
