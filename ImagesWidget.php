@@ -58,8 +58,8 @@ class ImagesWidget extends \Asgard\Form\Widget {
 					<li>
 						<img src="<?=$thumb_url ?>" alt=""/>
 						<ul>
-							<li class="view"><a href="<?=$url ?>" rel="facebox"><?=__('See') ?></a></li>
-							<li class="delete"><a href="<?=$container['resolver']->url_for(['Admin\Controllers\FilesController', 'deleteOne'], ['entityAlias' => $container['adminManager']->getAlias(get_class($entity)), 'id' => $entity->id, 'pos' => $i, 'file' => $name]) ?>"><?=__('Del.') ?></a></li>
+							<li class="view"><a href="<?=$url ?>" rel="facebox"><?=$container['translator']->trans('See') ?></a></li>
+							<li class="delete"><a href="<?=$container['resolver']->url_for(['Admin\Controllers\FilesController', 'deleteOne'], ['entityAlias' => $container['adminManager']->getAlias(get_class($entity)), 'id' => $entity->id, 'pos' => $i, 'file' => $name]) ?>"><?=$container['translator']->trans('Del.') ?></a></li>
 						</ul>
 					</li>
 					<?php
@@ -71,9 +71,9 @@ class ImagesWidget extends \Asgard\Form\Widget {
 				</ul>
 				
 				<p id="<?=$uid ?>">
-					<label><?=__('Upload:') ?></label><br />
+					<label><?=$container['translator']->trans('Upload:') ?></label><br />
 					<input type="file" id="<?=$uid ?>-filesupload" class="filesupload" /><br/>
-					<span class="uploadmsg"><?=__('Maximum size 3Mb') ?></span>
+					<span class="uploadmsg"><?=$container['translator']->trans('Maximum size 3Mb') ?></span>
 					<div id="<?=$uid ?>-custom-queue"></div>
 				</p>
 				

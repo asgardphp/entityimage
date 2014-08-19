@@ -25,7 +25,7 @@ class AdminImagesController extends \Admin\Libs\Controller\AdminParentController
 		$container = $this->container;
 			
 		if(!$request->file->has('Filedata'))
-			return $this->response->setCode(400)->setContent(__('An error occured.'));
+			return $this->response->setCode(400)->setContent($this->container['translator']->trans('An error occured.'));
 
 		try {
 			$postFile = $request->file['Filedata'];
@@ -43,15 +43,15 @@ class AdminImagesController extends \Admin\Libs\Controller\AdminParentController
 			$response = '<li>
 						<img src="'.$thumb_url.'" alt=""/>
 						<ul>
-							<li class="view"><a href="'.$url.'" rel="facebox">'.__('See').'</a></li>
-							<li class="delete"><a href="'.$deleteurl.'">'.__('Del.').'</a></li>
+							<li class="view"><a href="'.$url.'" rel="facebox">'.$this->container['translator']->trans('See').'</a></li>
+							<li class="delete"><a href="'.$deleteurl.'">'.$this->container['translator']->trans('Del.').'</a></li>
 						</ul>
 					</li>
 					<script>
 					$(\'a[rel*=facebox]\').facebox()
 					</script>';
 		} catch(\Asgard\Orm\EntityException $e) {
-			return $this->response->setCode(400)->setContent(__('An error occured.'));
+			return $this->response->setCode(400)->setContent($this->container['translator']->trans('An error occured.'));
 		}
 
 		return $this->response->setCode(200)->setContent($response);

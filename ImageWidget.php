@@ -28,7 +28,7 @@ class ImageWidget extends \Asgard\Form\Widget {
 			</p>';
 			
 			if($optional)
-				$str .= '<a href="'.$container['resolver']->url_for(['Admin\Controllers\FilesController', 'delete'], ['entityAlias' => $container['adminManager']->getAlias(get_class($entity)), 'id' => $entity->id, 'file' => $name]).'">'. __('Delete').'</a><br/><br/>';
+				$str .= '<a href="'.$container['resolver']->url_for(['Admin\Controllers\FilesController', 'delete'], ['entityAlias' => $container['adminManager']->getAlias(get_class($entity)), 'id' => $entity->id, 'file' => $name]).'">'. $container['translator']->trans('Delete').'</a><br/><br/>';
 		}
 
 		return $str;
