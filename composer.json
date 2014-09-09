@@ -7,14 +7,13 @@
 		"email": "michel@hognerud.net"
 	}],
 	"require": {
-        "php": ">=5.4.0",
-        "imagine/imagine": "0.*",
-        "asgard/entity": "@dev"
+		"php": ">=5.4.0",
+		"imagine/imagine": "0.*",
+		"asgard/entity": "v0.*"
 	},
 	"autoload": {
 		"psr-4": {
 			"Asgard\\Entityimage\\": "."
 		}
-	},
-    "minimum-stability": "dev"
+	}
 }
