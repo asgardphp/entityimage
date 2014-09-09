@@ -9,7 +9,7 @@
 	"require": {
 		"php": ">=5.4.0",
 		"imagine/imagine": "0.*",
-		"asgard/entity": "v0.*"
+		"asgard/entity": "0.*"
 	},
 	"autoload": {
 		"psr-4": {
