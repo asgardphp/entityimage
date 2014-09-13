@@ -2,11 +2,11 @@
 namespace Asgard\Entityimage;
 
 class Bundle extends \Asgard\Core\BundleLoader {
-	public function buildContainer($container) {
+	public function buildContainer(\Asgard\Container\Container $container) {
 		$container->register('Asgard.Entity.PropertyType.image', function($container, $params) { return new ImageProperty($params); });
 	}
 
-	public function run($container) {
+	public function run(\Asgard\Container\Container $container) {
 		parent::run($container);
 
 		$container['widgetsManager']->addNamespace('Asgard\Entityimage');
