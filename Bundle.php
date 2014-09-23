@@ -11,7 +11,7 @@ class Bundle extends \Asgard\Core\BundleLoader {
 
 		$container['widgetsManager']->addNamespace('Asgard\Entityimage');
 		if(isset($container['adminEntityFieldsSolver'])) {
-			$container['adminEntityFieldsSolver']->addMultiple(function($property) {
+			$container['adminEntityFieldsSolver']->addMany(function($property) {
 				if($property instanceof \Asgard\Entityimage\ImageProperty) {
 					if($property->get('web'))
 						return new MultipleImagesField;
