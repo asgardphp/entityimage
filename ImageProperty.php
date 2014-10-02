@@ -11,8 +11,8 @@ class ImageProperty extends \Asgard\Entity\Properties\FileProperty {
 		$container = $this->definition->getContainer();
 		if($container->has('config') && isset($container['config']['webdir']))
 			$image->setWebDir($container['config']['webdir']);
-		if($container->has('request'))
-			$image->setUrl($container['request']->url);
+		if($container->has('httpKernel'))
+			$image->setUrl($container['httpKernel']->getRequest()->url);
 		$image->setFormat($this->get('format'));
 		$image->setQuality($this->get('quality'));
 		$image->setDir($this->get('dir'));
@@ -20,7 +20,7 @@ class ImageProperty extends \Asgard\Entity\Properties\FileProperty {
 		return $image;
 	}
 
-	public function doSet($val) {
+	public function doSet($val, \Asgard\Entity\Entity $entity, $name) {
 		if(is_string($val) && $val !== null)
 			$val = new \Asgard\Entityimage\Image($val);
 		if(is_object($val)) {
@@ -29,8 +29,8 @@ class ImageProperty extends \Asgard\Entity\Properties\FileProperty {
 			$container = $this->definition->getContainer();
 			if($container->has('config') && isset($container['config']['webdir']))
 				$val->setWebDir($container['config']['webdir']);
-			if($container->has('request'))
-				$val->setUrl($container['request']->url);
+			if($container->has('httpKernel'))
+				$val->setUrl($container['httpKernel']->getRequest()->url);
 			$val->setFormat($this->get('format'));
 			$val->setQuality($this->get('quality'));
 			$val->setDir($this->get('dir'));

@@ -23,7 +23,7 @@ class AdminImagesController extends \Admin\Libs\Controller\AdminParentController
 	public function addimageAction($request) {
 		$entity = $this->entity;
 		$container = $this->container;
-			
+
 		if(!$request->file->has('Filedata'))
 			return $this->response->setCode(400)->setContent($this->container['translator']->trans('An error occured.'));
 
@@ -36,8 +36,8 @@ class AdminImagesController extends \Admin\Libs\Controller\AdminParentController
 			$postFile = $entity->get($fileName)->add($postFile);
 			$entity->save();
 
-			$deleteurl = $container['resolver']->url_for(['Admin\Controllers\FilesController', 'deleteOne'], ['entityAlias' => $request['entityAlias'], 'id' => $entity->id, 'pos' => $entity->get($fileName)->size(), 'file' => $request['file']]);
-			$downloadurl = $container['resolver']->url_for(['Admin\Controllers\FilesController', 'downloadOne'], ['entityAlias' => $request['entityAlias'], 'id' => $entity->id, 'pos' => $entity->get($fileName)->size(), 'file' => $request['file']]);
+			$deleteurl = $container['resolver']->url(['Admin\Controllers\FilesController', 'deleteOne'], ['entityAlias' => $request['entityAlias'], 'id' => $entity->id, 'pos' => $entity->get($fileName)->size(), 'file' => $request['file']]);
+			$downloadurl = $container['resolver']->url(['Admin\Controllers\FilesController', 'downloadOne'], ['entityAlias' => $request['entityAlias'], 'id' => $entity->id, 'pos' => $entity->get($fileName)->size(), 'file' => $request['file']]);
 			$thumb_url = $request->url->to('imagecache/admin_thumb/'.$postFile->srcFromWebDir());
 			$url = $postFile->url();
 			$response = '<li>

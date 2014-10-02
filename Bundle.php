@@ -2,11 +2,11 @@
 namespace Asgard\Entityimage;
 
 class Bundle extends \Asgard\Core\BundleLoader {
-	public function buildContainer(\Asgard\Container\Container $container) {
+	public function buildContainer(\Asgard\Container\ContainerInterface $container) {
 		$container->register('Asgard.Entity.PropertyType.image', function($container, $params) { return new ImageProperty($params); });
 	}
 
-	public function run(\Asgard\Container\Container $container) {
+	public function run(\Asgard\Container\ContainerInterface $container) {
 		parent::run($container);
 
 		$container['widgetsManager']->addNamespace('Asgard\Entityimage');
@@ -19,7 +19,7 @@ class Bundle extends \Asgard\Core\BundleLoader {
 						return new \Admin\Libs\Form\Fields\MultipleFilesField;
 				}
 			});
-			
+
 			$container['adminEntityFieldsSolver']->add(function($property) {
 				if(get_class($property) == 'Asgard\Entityimage\ImageProperty') {
 					$field = new \Asgard\Form\Fields\FileField;
@@ -30,7 +30,7 @@ class Bundle extends \Asgard\Core\BundleLoader {
 			});
 		}
 	}
-	
+
 	protected function loadControllers() {
 		if(!class_exists('Admin\Libs\Controller\AdminParentController'))
 			return [];

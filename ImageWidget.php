@@ -4,7 +4,7 @@ namespace Asgard\Entityimage;
 class ImageWidget extends \Asgard\Form\Widget {
 	public function render(array $options=[]) {
 		$options = $this->options+$options;
-		
+
 		$attrs = [];
 		if(isset($options['attrs']))
 			$attrs = $options['attrs'];
@@ -16,7 +16,7 @@ class ImageWidget extends \Asgard\Form\Widget {
 		]+$attrs);
 		$container = $this->field->getTopForm()->getContainer();
 		$entity = $this->field->getTopForm()->getEntity();
-		$name = $this->field->name;		
+		$name = $this->field->name;
 		$optional = !$entity->getDefinition()->property($name)->required();
 
 		if($entity->isOld() && $entity->$name && $entity->$name->exists()) {
@@ -24,11 +24,11 @@ class ImageWidget extends \Asgard\Form\Widget {
 			if(!$file->src())
 				return $str;
 			$str .= '<p>
-				<a target="_blank" href="'.$container['request']->url->to($file->srcFromWebDir()).'" rel="facebox"><img src="'.$container['imagecache']->url($file->srcFromWebDir(), 'admin_thumb').'" alt=""/></a>
+				<a target="_blank" href="'.$container['httpKernel']->getRequest()->url->to($file->srcFromWebDir()).'" rel="facebox"><img src="'.$container['imagecache']->url($file->srcFromWebDir(), 'admin_thumb').'" alt=""/></a>
 			</p>';
-			
+
 			if($optional)
-				$str .= '<a href="'.$container['resolver']->url_for(['Admin\Controllers\FilesController', 'delete'], ['entityAlias' => $container['adminManager']->getAlias(get_class($entity)), 'id' => $entity->id, 'file' => $name]).'">'. $container['translator']->trans('Delete').'</a><br/><br/>';
+				$str .= '<a href="'.$container['resolver']->url(['Admin\Controllers\FilesController', 'delete'], ['entityAlias' => $container['adminManager']->getAlias(get_class($entity)), 'id' => $entity->id, 'file' => $name]).'">'. $container['translator']->trans('Delete').'</a><br/><br/>';
 		}
 
 		return $str;
