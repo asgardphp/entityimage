@@ -17,7 +17,9 @@ class EntityimageTest extends \PHPUnit_Framework_TestCase {
 		});
 
 		$entitiesManager = $container['entitiesmanager'] = new \Asgard\Entity\EntitiesManager($container);
-		$entitiesManager->setValidatorFactory($container->createFactory('validator'));
+		$rulesRegistry = new \Asgard\Validation\RulesRegistry;
+		$rulesRegistry->registerNamespace('Asgard\File\Rules');
+		$entitiesManager->setValidatorFactory(new \Asgard\Validation\ValidatorFactory($rulesRegistry));
 		#set the EntitiesManager static instance for activerecord-like entities (e.g. new Article or Article::find())
 		\Asgard\Entity\EntitiesManager::setInstance($entitiesManager);
 	}
