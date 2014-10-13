@@ -5,9 +5,7 @@ class EntityimageTest extends \PHPUnit_Framework_TestCase {
 	public static function setUpBeforeClass() {
 		$container = new \Asgard\Container\Container;
 		$container->register('Asgard.Entity.PropertyType.image', function($container, $params) { return new \Asgard\Entityimage\ImageProperty($params); });
-		$container['config']          = new \Asgard\Config\Config;
 		$container['hooks']           = new \Asgard\Hook\HooksManager($container);
-		$container['cache']           = new \Asgard\Cache\NullCache;
 		$container['rulesregistry']   = new \Asgard\Validation\RulesRegistry;
 		$container['rulesregistry']->registerNamespace('Asgard\File\Rules');
 		$container->register('validator', function($container) {
