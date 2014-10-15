@@ -9,9 +9,9 @@ class Bundle extends \Asgard\Core\BundleLoader {
 	public function run(\Asgard\Container\ContainerInterface $container) {
 		parent::run($container);
 
-		$container['widgetsManager']->addNamespace('Asgard\Entityimage');
-		if(isset($container['adminEntityFieldsSolver'])) {
-			$container['adminEntityFieldsSolver']->addMany(function($property) {
+		$container['WidgetManager']->addNamespace('Asgard\Entityimage');
+		if(isset($container['adminEntityFieldSolver'])) {
+			$container['adminEntityFieldSolver']->addMany(function($property) {
 				if($property instanceof \Asgard\Entityimage\ImageProperty) {
 					if($property->get('web'))
 						return new MultipleImagesField;
@@ -20,7 +20,7 @@ class Bundle extends \Asgard\Core\BundleLoader {
 				}
 			});
 
-			$container['adminEntityFieldsSolver']->add(function($property) {
+			$container['adminEntityFieldSolver']->add(function($property) {
 				if(get_class($property) == 'Asgard\Entityimage\ImageProperty') {
 					$field = new \Asgard\Form\Fields\FileField;
 					if($property->get('web'))
