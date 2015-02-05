@@ -14,9 +14,9 @@ class ImageWidget extends \Asgard\Form\Widget {
 			'name'	=>	$this->name,
 			'id'	=>	isset($options['id']) ? $options['id']:null,
 		]+$attrs);
-		$container = $this->field->getTopForm()->getContainer();
+		$container = \Asgard\Container\Container::singleton();
 		$entity = $this->field->getTopForm()->getEntity();
-		$name = $this->field->name;
+		$name = $this->field->getName();
 		$optional = !$entity->getDefinition()->property($name)->required();
 
 		if($entity->isOld() && $entity->$name && $entity->$name->exists()) {
