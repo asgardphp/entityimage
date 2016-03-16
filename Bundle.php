@@ -16,13 +16,13 @@ class Bundle extends \Asgard\Core\BundleLoader {
 					if($property->get('web'))
 						return new MultipleImagesField;
 					else
-						return new \Admin\Libs\Form\Fields\MultipleFilesField;
+						return new \Admin\Libs\Form\Field\MultipleFilesField;
 				}
 			});
 
 			$container['adminEntityFieldSolver']->add(function($property) {
 				if(get_class($property) == 'Asgard\Entityimage\ImageProperty') {
-					$field = new \Asgard\Form\Fields\FileField;
+					$field = new \Asgard\Form\Field\FileField;
 					if($property->get('web'))
 						$field->setDefaultWidget('image');
 					return $field;

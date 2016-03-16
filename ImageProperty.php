@@ -1,7 +1,7 @@
 <?php
 namespace Asgard\Entityimage;
 
-class ImageProperty extends \Asgard\Entity\Properties\FileProperty {
+class ImageProperty extends \Asgard\Entity\Property\FileProperty {
 	protected static $defaultExtensions = ['png', 'jpg', 'jpeg', 'gif'];
 
 	protected function doUnserialize($str) {
