@@ -1,10 +1,10 @@
 <?php
-namespace Asgard\Entityimage\Controllers;
+namespace Asgard\Entityimage\Controller;
 
 /**
  * @Prefix("admin/files/:entityAlias/:id/:file")
  */
-class AdminImagesController extends \Admin\Libs\Controller\AdminParentController {
+class AdminImages extends \Admin\Libs\Controller\AdminParentController {
 	public function before(\Asgard\Http\Request $request) {
 		$this->layout = false;
 		$entityAlias = $request['entityAlias'];
@@ -36,8 +36,8 @@ class AdminImagesController extends \Admin\Libs\Controller\AdminParentController
 			$postFile = $entity->get($fileName)->add($postFile);
 			$entity->save();
 
-			$deleteurl = $container['resolver']->url(['Admin\Controllers\FilesController', 'deleteOne'], ['entityAlias' => $request['entityAlias'], 'id' => $entity->id, 'pos' => $entity->get($fileName)->size(), 'file' => $request['file']]);
-			$downloadurl = $container['resolver']->url(['Admin\Controllers\FilesController', 'downloadOne'], ['entityAlias' => $request['entityAlias'], 'id' => $entity->id, 'pos' => $entity->get($fileName)->size(), 'file' => $request['file']]);
+			$deleteurl = $container['resolver']->url(['Admin\Controller\Files', 'deleteOne'], ['entityAlias' => $request['entityAlias'], 'id' => $entity->id, 'pos' => $entity->get($fileName)->size(), 'file' => $request['file']]);
+			$downloadurl = $container['resolver']->url(['Admin\Controller\Files', 'downloadOne'], ['entityAlias' => $request['entityAlias'], 'id' => $entity->id, 'pos' => $entity->get($fileName)->size(), 'file' => $request['file']]);
 			$thumb_url = $request->url->to('imagecache/admin_thumb/'.$postFile->srcFromWebDir());
 			$url = $postFile->url();
 			$response = '<li>
