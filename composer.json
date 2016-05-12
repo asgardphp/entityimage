@@ -8,7 +8,7 @@
 	}],
 	"require": {
 		"php": ">=5.5.9",
-		"imagine/imagine": "^0.0",
+		"imagine/imagine": "~0.0",
 		"asgard/file": "~0.3.0",
 		"asgard/entity": "~0.3.0"
 	},
@@ -21,5 +21,6 @@
 		"branch-alias": {
 			"dev-master": "0.3-dev"
 		}
-	}
+	},
+	"minimum-stability": "dev"
 }
